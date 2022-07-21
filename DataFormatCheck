@@ -1,0 +1,65 @@
+https://github.com/DreamTechie/Jira/blob/main/Sample
+
+import com.opensymphony.workflow.InvalidInputException;
+import com.onresolve.jira.groovy.user.FormField
+
+def abuFF = getFieldByName("Trouble Ticket Type")
+Object t1=abuFF.value
+ArrayList al1 = new ArrayList();
+al1 = (ArrayList) t1;
+String troubleTicketType =al1[0].toString()
+
+//This is the customfield ID to be used in the Test Environment
+FormField SupportCase  = getFieldById ("customfield_12720")
+
+//This is the customfield ID to be used in the Prod Environment
+//FormField Source_IP = getFieldById ("customfield_12417")
+
+String SupportCase_Value = SupportCase.getValue()
+
+if(troubleTicketType != "Transport/Connectivity Issue"){
+
+if (SupportCase_Value == null) {SupportCase_Value = 'NO_VALUE_ENTERED'}
+
+else {}
+
+boolean isCustomerSingleName = SupportCase_Value.matches("(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10})")
+boolean isCustomerDoubleName = SupportCase_Value.matches("(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10})")
+boolean isCustomerTripleName = SupportCase_Value.matches("(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10})")
+boolean isCustomerFourName = SupportCase_Value.matches("(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10})")
+boolean isCustomerMultipleName = SupportCase_Value.matches("(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10}):(([a-zA-Z]{1,10}-)[0-9a-zA-Z]{1,10})")
+
+
+String Error_Msg = "Please follow the format SupportCase:Vendor Number"
+}
+
+if (isCustomerSingleName) {
+    
+   SupportCase.clearError()
+    
+	}
+else if (isCustomerDoubleName) {
+    
+    SupportCase.clearError()
+    
+	}
+else if (isCustomerTripleName) {
+    
+    SupportCase.clearError()
+    
+	}
+else if (isCustomerFourName) {
+    
+    SupportCase.clearError()
+    
+	}
+else if (isCustomerMultipleName) {
+    
+    SupportCase.clearError()
+    
+	}
+
+else {
+    
+    SupportCase.setError(Error_Msg)
+	 }
