@@ -1,23 +1,30 @@
-https://github.com/DreamTechie/Jira/blob/main/Sample
-
-import com.opensymphony.workflow.InvalidInputException;
+import com.onresolve.jira.groovy.user.FormField
+import com.atlassian.jira.issue.IssueFieldConstants
+import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.jira.issue.customfields.manager.OptionsManager
+import com.opensymphony.workflow.InvalidInputException
 import com.onresolve.jira.groovy.user.FormField
 
+FormField abuFF = getFieldByName(getFieldChanged())
+
 def abuFF = getFieldByName("Trouble Ticket Type")
-Object t1=abuFF.value
+String t1 = abuFF.value
 ArrayList al1 = new ArrayList();
 al1 = (ArrayList) t1;
 String troubleTicketType =al1[0].toString()
 
+
 //This is the customfield ID to be used in the Test Environment
-FormField SupportCase  = getFieldById ("customfield_12720")
+FormField SupportCase  = getFieldById("customfield_12720")
 
 //This is the customfield ID to be used in the Prod Environment
 //FormField Source_IP = getFieldById ("customfield_12417")
 
+
 String SupportCase_Value = SupportCase.getValue()
 
-if(troubleTicketType != "Transport/Connectivity Issue"){
+if(troubleTicketType != "Transport/Connectivity Issue")
+{
 
 if (SupportCase_Value == null) {SupportCase_Value = 'NO_VALUE_ENTERED'}
 
