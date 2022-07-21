@@ -1,4 +1,3 @@
-import com.onresolve.jira.groovy.user.FormField
 import com.atlassian.jira.issue.IssueFieldConstants
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.customfields.manager.OptionsManager
