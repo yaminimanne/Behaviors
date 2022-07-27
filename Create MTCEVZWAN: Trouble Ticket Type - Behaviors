@@ -305,7 +305,7 @@ else if (pulltype == "Transport/Connectivity Issue") {
     Summary_Field.setHidden(false)
     Destination_POD.setHidden(false)
     Destination_Port.setHidden(false)
-  //  SupportCase.setHidden(false)
+    SupportCase.setHidden(false)
     
     Affects_Version.setRequired(false)
     getFieldById("issuelinks").setRequired(false)
@@ -331,6 +331,51 @@ else if (pulltype == "Transport/Connectivity Issue") {
     
     else {}
 
+}
+else if (pulltype == "Netscout support") { 
+    
+	Device_MDN.setHidden(true).setRequired(false)
+    Originating_Number.setHidden(true).setRequired(false)
+    Terminating_Number.setHidden(true).setRequired(false)
+    Failed_Call_Date_Time.setHidden(true).setRequired(false)
+    AccessNetworkType.setHidden(true).setRequired(false)
+    Problem_Type.setHidden(true).setRequired(false)
+    Priority_Field.setHidden(false)
+    Source_IP.setHidden(false).setRequired(true)
+    Destination_IP.setHidden(false).setRequired(true)
+    VRF.setHidden(false)
+    POD.setHidden(false)
+    OneTalk_Field.setHidden(true).setRequired(false)
+    Summary_Field.setHidden(false)
+    Destination_POD.setHidden(false)
+    Destination_Port.setHidden(false)
+    Support_Case.setHidden(false).setRequired(false)
+    
+    Affects_Version.setRequired(false)
+    getFieldById("issuelinks").setRequired(false)
+    OneTalk_Field.clearError()
+    Source_IP.clearError()
+    Support_Case.clearError()
+    
+    
+    Device_MDN.clearError()
+    Originating_Number.clearError()
+    Terminating_Number.clearError()
+    Failed_Call_Date_Time.clearError()
+    
+    hideTab(CallProcessingTab)
+    showTab(TransportTab)
+    
+    
+     if (issueId == null) {
+         
+         description_field.setFormValue("DO NOT DELETE THE DATA FORMAT SHOWN BELOW.  SIMPLY ENTER THE REQUIRED INFORMATION IN THE APPROPRIATE PLACE." + " \n " +"---------------------"+ " \n " +"Description of the Issue: " + " \n " + "Date last known to be working: " + " \n " + "(If not working previously, please open an ESR via the Lab Confluence Homepage instead of submitting this trouble ticket.)" + " \n " + "Frequency the issue is reproduced? (Ex: Not working, Intermittent, Radio Failure): " + " \n " + "Is this a connectivity issue?")
+         //This is to set the component value to "Transport".  The Component ID Value for Production is [13869].  The Component ID Values for Test is [13004]
+	     Component_Field.setFormValue([13004])
+	     Summary_Field.setFormValue("")
+     	}
+    
+    else {}
 }
 
 else {
