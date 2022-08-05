@@ -372,6 +372,7 @@ else if (pulltype == "Netscout support") {
          description_field.setFormValue("DO NOT DELETE THE DATA FORMAT SHOWN BELOW.  SIMPLY ENTER THE REQUIRED INFORMATION IN THE APPROPRIATE PLACE." + " \n " +"---------------------"+ " \n " +"Description of the Issue: " + " \n " + "Date last known to be working: " + " \n " + "(If not working previously, please open an ESR via the Lab Confluence Homepage instead of submitting this trouble ticket.)" + " \n " + "Frequency the issue is reproduced? (Ex: Not working, Intermittent, Radio Failure): " + " \n " + "Is this a connectivity issue?")
          //This is to set the component value to "Transport".  The Component ID Value for Production is [13869].  The Component ID Values for Test is [12637]
 	     Component_Field.setFormValue([12637])
+	     getFieldById(ATTACHMENT).setDescription("<div class=\"aui-message aui-message-info\"><p><b>Trouble Tickets should only be opened for something that worked previously, but is currently not working." + "</b></div>" )
 	     Summary_Field.setFormValue("")
      	}
     
