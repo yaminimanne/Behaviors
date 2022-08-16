@@ -1,0 +1,111 @@
+import com.onresolve.jira.groovy.user.FormField
+import com.atlassian.jira.component.ComponentAccessor
+import com.onresolve.jira.groovy.user.FieldBehaviours
+import static com.atlassian.jira.issue.IssueFieldConstants.*
+import groovy.transform.BaseScript
+
+
+//These are the customfield ID to be used in the Test Environment
+FormField Terminating_Number = getFieldById ("customfield_12111")
+FormField Problem_Type = getFieldById ("customfield_12300")
+FormField Test_Field = getFieldById ("customfield_xxxx")
+FormField Test_Field2 = getFieldById ("customfield_xxxx")
+
+//These are the customfield ID to be used in the Prod Environment
+//FormField Terminating_Number = getFieldById ("customfield_12415")
+//FormField Problem_Type = getFieldById ("customfield_12410")
+
+
+
+
+String pulltype = (String) Problem_Type.getValue()
+if (pulltype == "Registration Failure") { 
+	
+    Terminating_Number.setHidden(true)
+    
+    Terminating_Number.setRequired(false)
+    
+    Terminating_Number.clearError()
+        
+    }
+
+else if (pulltype == "Unable to Connect") { 
+	
+    Terminating_Number.setHidden(true)
+    
+    Terminating_Number.setRequired(false)
+        
+    Terminating_Number.clearError()
+        
+}
+
+else if (pulltype == "No signaling") { 
+	
+    Terminating_Number.setHidden(true)
+	Test_Field.setHidden(false)
+	Test_Field2.setHidden(true)
+    
+    Terminating_Number.setRequired(false)
+        
+    Terminating_Number.clearError()
+        
+}
+
+else if (pulltype == "Perfecto") { 
+	
+    Terminating_Number.setHidden(true)
+	Test_Field.setHidden(true)
+	Test_Field2.setHidden(false)
+    
+    Terminating_Number.setRequired(false)
+        
+    Terminating_Number.clearError()
+        
+}
+else {
+	Terminating_Number.setHidden(false)
+    
+    Terminating_Number.setRequired(true)
+            
+}
+
+//These are the customfield ID to be used in the Test Environment
+def Trouble_Ticket_Type = getFieldById ("customfield_12106")
+def Device_MDN = getFieldById ("customfield_12301")
+
+
+//These are the customfield ID to be used in the Prod Environment
+//def Trouble_Ticket_Type = getFieldById ("customfield_12409")
+//def Device_MDN = getFieldById ("customfield_12412")
+
+
+def Summary_Field = getFieldByName ("Summary")
+
+
+String Probtype = (String) Trouble_Ticket_Type.getValue()
+
+String Prob_type = (String) Problem_Type.getValue()
+
+String MDN_Val = (String) Device_MDN.getValue()
+
+def Summary_Set_Value = (Prob_type + " - " + MDN_Val)
+
+
+if (Prob_type != null && MDN_Val != null){
+            if (Probtype == "Call Processing Issue") { 
+
+                Summary_Field.setFormValue(Summary_Set_Value)           
+
+            }
+
+
+            else {
+
+                Summary_Field.setFormValue("")   
+            }
+
+}
+
+else {
+    
+}
